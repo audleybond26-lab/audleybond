@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Mommy ❤️</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Georgia', serif;
+}
+
+body{
+  height:100vh;
+  background: linear-gradient(to bottom, #fff1e6, #ffe0cc);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+/* Soft Intro */
+#intro{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background: linear-gradient(to bottom, #ffd6cc, #ffe6e0);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#7a4e48;
+  font-size:28px;
+  text-align:center;
+  opacity:1;
+  animation:fadeOut 3s forwards;
+  animation-delay:2s;
+  z-index:10;
+}
+
+@keyframes fadeOut{
+  to{
+    opacity:0;
+    visibility:hidden;
+  }
+}
+
+/* Floating Hearts */
+.heart{
+  position:absolute;
+  font-size:18px;
+  animation: floatUp linear infinite;
+  opacity:0.6;
+}
+
+@keyframes floatUp{
+  0%{ transform:translateY(100vh); opacity:0; }
+  50%{ opacity:0.7; }
+  100%{ transform:translateY(-10vh); opacity:0; }
+}
+
+#cardContainer{
+  perspective:1200px;
+}
+
+.card{
+  width:90vw;
+  max-width:420px;
+  height:320px;
+}
+
+.card-inner{
+  width:100%;
+  height:100%;
+  position:relative;
+  transition:transform 1s;
+  transform-style:preserve-3d;
+}
+
+.card.open .card-inner{
+  transform:rotateY(180deg);
+}
+
+.card-front, .card-back{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:20px;
+  backface-visibility:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:25px;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+}
+
+.card-front{
+  background:#f8c8c8;
+  color:#6e3b3b;
+  font-size:22px;
+}
+
+.card-back{
+  background:white;
+  color:#7a4e48;
+  transform:rotateY(180deg);
+  overflow-y:auto;
+}
+
+.greet{
+  font-size:16px;
+  line-height:1.7;
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+  For The Strongest Woman In Our Life ❤️
+</div>
+
+<div id="cardContainer">
+  <div class="card" onclick="this.classList.toggle('open')">
+    <div class="card-inner">
+      <div class="card-front">
+        Tap To Open 💌
+      </div>
+      <div class="card-back">
+        <div class="greet">
+          <strong>My Dearest Mommy!</strong><br><br>
+
+          Even though you are far away from us, you are always in our hearts every single day. 
+          We know how hard it is for you to be in another country, working tirelessly, 
+          missing birthdays, holidays, and simple moments at home — all just to give us a better life.<br><br>
+
+          Mommy, we see your sacrifices.  
+          We see your strength.  
+          We see the love behind every tired smile.<br><br>
+
+          You gave up comfort so we could have opportunities.  
+          You endured loneliness so we would never feel lack.  
+          You carried burdens quietly so we could grow without worries.<br><br>
+
+          If sometimes we forget to say thank you, please forgive us. 
+          But deep in our hearts, we are forever grateful for everything you have done and continue to do.<br><br>
+
+          Everything we achieve in life will always be because of your love, your guidance, and your sacrifices.<br><br>
+
+          We miss you more than words can explain.  
+          We love you more than distance can measure.  
+          And we are praying for the day we can finally hold you in our arms again. ❤️
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* Floating hearts animation */
+function createHeart(){
+  const heart=document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML="💖";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=(Math.random()*6+6)+"s";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),12000);
+}
+setInterval(createHeart,800);
+</script>
+
+</body>
+</html>
