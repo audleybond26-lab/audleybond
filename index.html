@@ -10,7 +10,7 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family: 'Georgia', serif;
+  font-family:'Georgia', serif;
 }
 
 body{
@@ -22,7 +22,7 @@ body{
   overflow:hidden;
 }
 
-/* 🌫 Fade Intro */
+/* Intro */
 #intro{
   position:absolute;
   width:100%;
@@ -47,7 +47,7 @@ body{
   }
 }
 
-/* 🌹 Rose Petals */
+/* Petals */
 .petal{
   position:absolute;
   top:-20px;
@@ -60,19 +60,6 @@ body{
   100%{ transform:translateY(100vh) rotate(360deg); opacity:0; }
 }
 
-/* 🎆 Confetti */
-.confetti{
-  position:absolute;
-  width:8px;
-  height:8px;
-  animation: explode 1s ease-out forwards;
-}
-
-@keyframes explode{
-  0%{ transform:translate(0,0); opacity:1; }
-  100%{ transform:translate(var(--x), var(--y)); opacity:0; }
-}
-
 /* Game */
 #game{
   text-align:center;
@@ -83,7 +70,6 @@ body{
 #game h1{
   font-size:28px;
   margin-bottom:15px;
-  text-shadow:0 0 20px rgba(255,255,255,0.6);
 }
 
 button{
@@ -117,8 +103,8 @@ button:hover{
 
 .card{
   width:90vw;
-  max-width:380px;
-  height:260px;
+  max-width:400px;
+  height:420px; /* taller for long message */
 }
 
 .card-inner{
@@ -160,9 +146,22 @@ button:hover{
   transform:rotateY(180deg);
 }
 
+/* Scrollable Letter */
 .greet{
   font-size:17px;
-  line-height:1.6;
+  line-height:1.7;
+  max-height:330px;
+  overflow-y:auto;
+  padding-right:10px;
+}
+
+/* Soft scrollbar */
+.greet::-webkit-scrollbar{
+  width:6px;
+}
+.greet::-webkit-scrollbar-thumb{
+  background:#ff758c;
+  border-radius:10px;
 }
 </style>
 </head>
@@ -170,7 +169,7 @@ button:hover{
 <body>
 
 <div id="intro">
-  For You, Love ❤️
+  For You ❤️
 </div>
 
 <div id="game">
@@ -189,9 +188,21 @@ button:hover{
       </div>
       <div class="card-back">
         <div class="greet">
-          My Love,<br>
-          Thankyou for all the love and support you have given to me! It is so appreciated ❤️<br>
-          Happy Valentine's Day 🌹
+
+          <!-- ✨ EDIT YOUR LONG MESSAGE HERE ✨ -->
+
+          My Love,<br><br>
+
+          (Love all i wanted to say is that thankyou! for making things possible! we've come so far Love! every fight every laughter
+          give us every progress relationship should have we might have many misunderstanding but always remember love! you are the greatest person in the world
+          i might not give you flowers on this very day! Special day! but i hope you realize na i do things much better than those flowers, chocolates
+          and surprises! i may have not been the best Boyfriend! But i will always make sure i will be your One call away! Through Good times and Bad Times!
+          we will conquer Every journey every steps in the way!)<br><br>
+
+          Happy Valentines Day My Love<br><br>
+
+          I love you endlessly ❤️
+
         </div>
       </div>
     </div>
@@ -217,10 +228,9 @@ function moveButton(btn){
 function unlock(){
   document.getElementById("game").style.display="none";
   document.getElementById("cardContainer").style.display="block";
-  launchConfetti();
 }
 
-/* 🌹 Petals */
+/* Petals */
 function createPetal(){
   const petal=document.createElement("div");
   petal.classList.add("petal");
@@ -231,21 +241,6 @@ function createPetal(){
   setTimeout(()=>petal.remove(),8000);
 }
 setInterval(createPetal,400);
-
-/* 🎆 Confetti */
-function launchConfetti(){
-  for(let i=0;i<120;i++){
-    const conf=document.createElement("div");
-    conf.classList.add("confetti");
-    conf.style.background=["#ff4e73","#ffffff","#ff0000","#ffc3a0"][Math.floor(Math.random()*4)];
-    conf.style.left="50%";
-    conf.style.top="50%";
-    conf.style.setProperty('--x',(Math.random()*600-300)+"px");
-    conf.style.setProperty('--y',(Math.random()*600-300)+"px");
-    document.body.appendChild(conf);
-    setTimeout(()=>conf.remove(),1000);
-  }
-}
 </script>
 
 </body>
