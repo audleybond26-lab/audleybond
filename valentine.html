@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Love ❤️</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Georgia', serif;
+}
+
+body{
+  height:100vh;
+  background: radial-gradient(circle at top, #ff5f6d, #ffc3a0);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+}
+
+/* 🌫 Fade Intro */
+#intro{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:radial-gradient(circle,#ff4e73,#ff758c);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  font-size:30px;
+  letter-spacing:2px;
+  opacity:1;
+  animation:fadeOut 3s forwards;
+  animation-delay:2s;
+  z-index:10;
+}
+
+@keyframes fadeOut{
+  to{
+    opacity:0;
+    visibility:hidden;
+  }
+}
+
+/* 🌹 Rose Petals */
+.petal{
+  position:absolute;
+  top:-20px;
+  font-size:20px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall{
+  0%{ transform:translateY(0) rotate(0deg); opacity:1; }
+  100%{ transform:translateY(100vh) rotate(360deg); opacity:0; }
+}
+
+/* 🎆 Confetti */
+.confetti{
+  position:absolute;
+  width:8px;
+  height:8px;
+  animation: explode 1s ease-out forwards;
+}
+
+@keyframes explode{
+  0%{ transform:translate(0,0); opacity:1; }
+  100%{ transform:translate(var(--x), var(--y)); opacity:0; }
+}
+
+/* Game */
+#game{
+  text-align:center;
+  color:white;
+  padding:20px;
+}
+
+#game h1{
+  font-size:28px;
+  margin-bottom:15px;
+  text-shadow:0 0 20px rgba(255,255,255,0.6);
+}
+
+button{
+  padding:12px 28px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.yes{
+  background:linear-gradient(45deg,#ff4e73,#ff758c);
+  color:white;
+}
+
+.no{
+  background:white;
+  color:#ff4e73;
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+
+/* Card */
+#cardContainer{
+  display:none;
+  perspective:1200px;
+}
+
+.card{
+  width:90vw;
+  max-width:380px;
+  height:260px;
+}
+
+.card-inner{
+  width:100%;
+  height:100%;
+  position:relative;
+  transition:transform 1s;
+  transform-style:preserve-3d;
+}
+
+.card.open .card-inner{
+  transform:rotateY(180deg);
+}
+
+.card-front, .card-back{
+  position:absolute;
+  width:100%;
+  height:100%;
+  border-radius:20px;
+  backface-visibility:hidden;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.card-front{
+  background:linear-gradient(135deg,#ff4e73,#ff758c);
+  color:white;
+  font-size:22px;
+}
+
+.card-back{
+  background:white;
+  color:#ff4e73;
+  transform:rotateY(180deg);
+}
+
+.greet{
+  font-size:17px;
+  line-height:1.6;
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+  For You, Love ❤️
+</div>
+
+<div id="game">
+  <h1>Love, Will You Be Mine? 💍</h1>
+  <p>Click YES 3 times to unlock your surprise 🌹</p>
+  <br>
+  <button class="yes" onclick="moveButton(this)">YES ❤️</button>
+  <button class="no" onclick="moveButton(this)">NO 😜</button>
+</div>
+
+<div id="cardContainer">
+  <div class="card" onclick="this.classList.toggle('open')">
+    <div class="card-inner">
+      <div class="card-front">
+        Tap To Open 💌
+      </div>
+      <div class="card-back">
+        <div class="greet">
+          My Love,<br>
+          Thankyou for all the love and support you have given to me! It is so appreciated ❤️<br>
+          Happy Valentine's Day 🌹
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let yesCount = 0;
+
+function moveButton(btn){
+  btn.style.position="absolute";
+  btn.style.top=Math.random()*80+"%";
+  btn.style.left=Math.random()*80+"%";
+
+  if(btn.classList.contains("yes")){
+    yesCount++;
+    if(yesCount>=3){
+      unlock();
+    }
+  }
+}
+
+function unlock(){
+  document.getElementById("game").style.display="none";
+  document.getElementById("cardContainer").style.display="block";
+  launchConfetti();
+}
+
+/* 🌹 Petals */
+function createPetal(){
+  const petal=document.createElement("div");
+  petal.classList.add("petal");
+  petal.innerHTML="🌹";
+  petal.style.left=Math.random()*100+"vw";
+  petal.style.animationDuration=(Math.random()*4+4)+"s";
+  document.body.appendChild(petal);
+  setTimeout(()=>petal.remove(),8000);
+}
+setInterval(createPetal,400);
+
+/* 🎆 Confetti */
+function launchConfetti(){
+  for(let i=0;i<120;i++){
+    const conf=document.createElement("div");
+    conf.classList.add("confetti");
+    conf.style.background=["#ff4e73","#ffffff","#ff0000","#ffc3a0"][Math.floor(Math.random()*4)];
+    conf.style.left="50%";
+    conf.style.top="50%";
+    conf.style.setProperty('--x',(Math.random()*600-300)+"px");
+    conf.style.setProperty('--y',(Math.random()*600-300)+"px");
+    document.body.appendChild(conf);
+    setTimeout(()=>conf.remove(),1000);
+  }
+}
+</script>
+
+</body>
+</html>
